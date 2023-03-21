@@ -12,11 +12,13 @@ Follow INSTALL.md for installing necessary dependencies
 ## Dataset and Data Preparation
 
 **UW-Madison GI Tract Image Segmentation Dataset**
+
 The MRI data and their annotations are hosted on Kaggle. A detailed description of the dataset and the download link can be found in this [webpage](https://www.kaggle.com/competitions/uw-madison-gi-tract-image-segmentation/data).
 
 **Note**: The training set can be directly downloaded, while the test set is only available when the code is submitted to Kaggle. For submission to Kaggle, please refer to instructions [here](https://www.kaggle.com/competitions/uw-madison-gi-tract-image-segmentation/overview/evaluation).
 
 **Download and Unpack the Dataset**
+
 To use code in this repository, please following the following steps to download and prepare the dataset
 * Download *uw-madison-gi-tract-image-segmentation.zip* from this [webpage](https://www.kaggle.com/competitions/uw-madison-gi-tract-image-segmentation/data).
 * Unpack the zip file under *./data* (or elsewhere and link to *./data*).
