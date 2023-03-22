@@ -1,7 +1,12 @@
-# UW-Madison-GI-Tract-Segmentation-Data-Tools
+# UW-Madison GI Tract Segmentation Data Tools
 
 ## Introduction
 This repository contains code for loading and visualizing MRI data used in [UW-Madison GI Tract Image Segmentation challenge](https://www.kaggle.com/competitions/uw-madison-gi-tract-image-segmentation/overview).
+
+<div align="center">
+  <img src="teaser.jpg" width="800px"/>
+</div>
+
 
 ## Changelog
 * 03/21/2023: Initial commit.
@@ -20,7 +25,7 @@ The MRI data and their annotations are hosted on Kaggle. A detailed description 
 **Download and Unpack the Dataset**
 
 To use code in this repository, please following the following steps to download and prepare the dataset
-* Download *uw-madison-gi-tract-image-segmentation.zip* from this [webpage](https://www.kaggle.com/competitions/uw-madison-gi-tract-image-segmentation/data).
+* Download *uw-madison-gi-tract-image-segmentation.zip* from this [webpage](https://www.kaggle.com/competitions/uw-madison-gi-tract-image-segmentation/data). A Kaggle account is needed.
 * Unpack the zip file under *./data* (or elsewhere and link to *./data*).
 * The folder structure should look like
 ```

@@ -3,7 +3,7 @@ import os
 import glob
 import time
 
-from PIL import Image
+from PIL import Image, ImageFont, ImageDraw
 import numpy as np
 import pandas as pd
 import moviepy.editor as mpy
@@ -89,6 +89,9 @@ def main(args):
         color_dict = get_color_dict()
         alpha = args.alpha
         fps = args.fps
+        font = ImageFont.truetype("FreeMono.ttf", 50)
+        w_offset, h_offset = 40, 40
+
         viz_img_list = []
         for idx, img in enumerate(img_data):
             # contrast enhancement / normalization -> convert to color image
@@ -96,7 +99,7 @@ def main(args):
             cur_img = np.tile(cur_img[:, :, np.newaxis], (1, 1, 3))
 
             # loop over all organ types
-            for type in ["small_bowel", "large_bowel", "stomach"]:
+            for type in color_dict.keys():
                 cur_color = np.array(color_dict[type]).reshape(1, 1, 3)
                 color_map = np.tile(cur_color, (im_h, im_w, 1))
 
@@ -107,7 +110,30 @@ def main(args):
 
             # clipping and type casting
             cur_img = np.clip(255 * cur_img, 0, 255).astype(np.uint8)
-            viz_img_list.append(cur_img)
+
+            # copy to PIL image for drawing the legends
+            viz_img = np.zeros(
+                [cur_img.shape[0], 2*cur_img.shape[1], cur_img.shape[2]],
+                dtype=np.uint8
+            )
+            viz_img[:, cur_img.shape[1]:, :] = cur_img
+            viz_img = Image.fromarray(viz_img)
+            # upsample the image by 2x for better visualization
+            viz_img = viz_img.resize((4*cur_img.shape[1], 2*cur_img.shape[0]))
+
+            # adding legends
+            draw = ImageDraw.Draw(viz_img)
+            margin = 2 * (cur_img.shape[0] - h_offset) / len(color_dict.keys())
+            for t_idx, type in enumerate(color_dict.keys()):
+                draw.text(
+                    (w_offset, t_idx * margin + h_offset),
+                    type,
+                    font=font,
+                    fill=tuple([int(255*c) for c in color_dict[type]])
+                )
+
+            viz_img = np.asarray(viz_img)
+            viz_img_list.append(viz_img)
 
         clip = mpy.ImageSequenceClip(viz_img_list, fps=fps)
         clip.write_gif(
