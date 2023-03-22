@@ -4,7 +4,7 @@
 This repository contains code for loading and visualizing MRI data used in [UW-Madison GI Tract Image Segmentation challenge](https://www.kaggle.com/competitions/uw-madison-gi-tract-image-segmentation/overview).
 
 <div align="center">
-  <img src="teaser.jpg" width="800px"/>
+  <img src="teaser.gif" width="800px"/>
 </div>
 
 
